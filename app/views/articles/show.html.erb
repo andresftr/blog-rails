@@ -8,11 +8,16 @@
   <%= @article.text %>
 </p>
 
+<p>
+  <strong>Autor:</strong>
+  <%= @article.user.user_name %>
+</p>
+
 <h2>Comments</h2>
 <%= render @article.comments %>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<%= link_to 'Edit', edit_article_path(@article), :class=>"badge badge-secondary" %> |
+<%= link_to 'Back', articles_path, :class=>"badge badge-secondary" %>

@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
  
     if @article.save
       redirect_to @article
@@ -27,6 +28,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
+    @article.user_id = current_user.id
    
     if @article.update(article_params)
       redirect_to @article
@@ -37,7 +39,8 @@ class ArticlesController < ApplicationController
 
   before_action :authenticate_user!
   def destroy
-    @article = Article.find(params[:id])
+    @user = User.find(params[:user_id])
+    @article = @user.articles.find(article_params)
     @article.destroy
   
     redirect_to articles_path
