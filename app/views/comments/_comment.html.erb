@@ -1,15 +1,14 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
- 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
+<div class="border border-info mb-2 w-50">
+  <div>
+    <strong><%= comment.user.user_name %>: </strong>
+    <%= comment.body %>
+  </div>
+  <div class="text-right mr-3">
+    <% if comment.user.user_name == current_user.user_name || @article.user.user_name == current_user.user_name%>
+      <%= link_to 'Destroy Comment', [comment.article, comment],
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      :class=>"badge badge-danger" %>
+    <% end %>
+  </div>
+</div>

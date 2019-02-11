@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     @article.user_id = current_user.id
  
     if @article.save
-      redirect_to @article
+      redirect_to @article, success: "Article successfully saved!"
     else
       render 'new'
     end
@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
     @article.user_id = current_user.id
    
     if @article.update(article_params)
-      redirect_to @article
+      redirect_to @article, success: "Article successfully edited!"
     else
       render 'edit'
     end
@@ -39,8 +39,7 @@ class ArticlesController < ApplicationController
 
   before_action :authenticate_user!
   def destroy
-    @user = User.find(params[:user_id])
-    @article = @user.articles.find(article_params)
+    @article = Article.find(params[:id])
     @article.destroy
   
     redirect_to articles_path
